@@ -49,3 +49,26 @@ CREATE TABLE "posts" (
 CREATE INDEX "latest_posts_given_topic" ON "posts" ("topic_id", "created_at");
 CREATE INDEX "latest_posts_given_user" ON "posts" ("user_id", "created_at");
 CREATE INDEX "url_moderation" ON "posts" ("url");
+
+-- Guidline #1: d. Create "comments" table
+CREATE TABLE "comments" (
+  "id" SERIAL PRIMARY KEY,
+  "content" TEXT NOT NULL,
+  "post_id" INTEGER NOT NULL,
+  "user_id" INTEGER,
+  "parent_id" INTEGER,
+  "created_at" TIMESTAMP WITH TIME ZONE,
+     
+  CONSTRAINT "non_empty_comment_text" CHECK (LENGTH(TRIM("content"))>0),
+     
+  CONSTRAINT "fkey_post_id"
+    FOREIGN KEY ("post_id") REFERENCES "posts" ON DELETE CASCADE,
+     
+  CONSTRAINT "fkey_user_id"
+    FOREIGN KEY ("user_id") REFERENCES "users" ON DELETE SET NULL,
+     
+  CONSTRAINT "fkey_comment_id"
+    FOREIGN KEY ("parent_id") REFERENCES "comments" ON DELETE CASCADE
+ );
+CREATE INDEX "comments_given_parent" ON "comments" ("parent_id", "id");
+CREATE INDEX "comments_given_user" ON "comments" ("user_id", "created_at");
