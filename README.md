@@ -42,14 +42,14 @@ This project was based on the following three main steps:
 
 ### Step I: Investigate the existing schema
 
-    The current schema has been investigated and some of specific improvements to be made has been pointed out in this step.
+The current schema has been investigated and some of specific improvements to be made has been pointed out in this step.
 
 ### Step II. Create the DDL for your new schema
 
-    Based on the initial investigation and assessment, DDL for the creation of new schema has been applied in this step. Of course there are some requirements for designing the new schema which have been listed in the coming section.
+Based on the initial investigation and assessment, DDL for the creation of new schema has been applied in this step. Of course there are some requirements for designing the new schema which have been listed in the coming section.
 
 ### Step III. Migrate the provided data
-    Once the new schema is created, it’s time to migrate the data from the provided schema. Some guidelines have also been listed in the following section.
+Once the new schema is created, it’s time to migrate the data from the provided schema. Some guidelines have also been listed in the following section.
 
 ## Requirements for New Database Schema Design
 ### Guideline I - About creating tables
