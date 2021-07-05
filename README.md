@@ -134,7 +134,4 @@ Firstly, running the `bad-db.sql` in the possgres terminal, we can create the or
 
 Secondly, running the codes in the `udiddit_social_news_aggregator.sql` block by block, we can reconstruct the normalized (new) database schema and migrate the data respectively.
 
-
- 
-
  
