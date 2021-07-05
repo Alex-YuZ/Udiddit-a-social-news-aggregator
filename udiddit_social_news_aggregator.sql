@@ -72,3 +72,21 @@ CREATE TABLE "comments" (
  );
 CREATE INDEX "comments_given_parent" ON "comments" ("parent_id", "id");
 CREATE INDEX "comments_given_user" ON "comments" ("user_id", "created_at");
+
+-- Guidline #1: e. Create "votes" table
+CREATE TABLE "votes" (
+  "id" SERIAL PRIMARY KEY,
+  "user_id" INTEGER,
+  "post_id" INTEGER NOT NULL,
+  "vote" SMALLINT,
+     
+  CONSTRAINT "uniqe_votes" UNIQUE ("user_id", "post_id"),
+     
+  CONSTRAINT "fkey_user_id"
+    FOREIGN KEY ("user_id") REFERENCES "users" ON DELETE SET NULL,
+     
+  CONSTRAINT "fkey_post_id"
+    FOREIGN KEY ("post_id") REFERENCES "posts" ON DELETE CASCADE,
+     
+  CONSTRAINT "vote_value_check" CHECK ("vote"= 1 OR "vote"= -1)
+);
