@@ -118,3 +118,19 @@ INSERT INTO "users" ("user_name")
 -- II. Migrate data into "topics" table from "bad_posts"
 INSERT INTO "topics" ("topic_name")
   SELECT DISTINCT topic FROM bad_posts;
+
+
+-- III. Migrate data into "posts" table from "bad_posts"
+INSERT INTO "posts" ("title", 
+                     "url", 
+                     "content", 
+                     "topic_id", 
+                     "user_id")
+  SELECT SUBSTR("title",1,100), 
+         "bp"."url", 
+         "bp"."text_content", 
+         "tp"."id", 
+         "u"."id"
+  FROM "bad_posts" "bp"
+  JOIN "topics" "tp" ON "tp"."topic_name"="bp"."topic"
+  JOIN "users" "u" ON "u"."user_name"="bp"."username";
