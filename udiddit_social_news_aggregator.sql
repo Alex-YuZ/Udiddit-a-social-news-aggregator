@@ -168,3 +168,7 @@ INSERT INTO "comments" ("content", "post_id", "user_id")
   FROM "bad_comments"
   JOIN "posts" ON "posts"."id"="bad_comments"."post_id"
   JOIN "users" ON "users"."user_name"="bad_comments"."username";
+
+-- Drop the original bad schema
+DROP TABLE IF EXISTS "bad_posts";
+DROP TABLE IF EXISTS "bad_comments";
