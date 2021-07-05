@@ -3,7 +3,8 @@ DROP TABLE IF EXISTS "topics" CASCADE;
 DROP TABLE IF EXISTS "posts" CASCADE;
 DROP TABLE IF EXISTS "comments" CASCADE;
 DROP TABLE IF EXISTS "votes" CASCADE;
- 
+
+-- Create Tables
 -- Guidline #1: a. Create "users" table
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
@@ -90,3 +91,26 @@ CREATE TABLE "votes" (
      
   CONSTRAINT "vote_value_check" CHECK ("vote"= 1 OR "vote"= -1)
 );
+
+
+--Data Migration--
+-- I. Migrate data into "users" from "bad_posts", "bad_comments"
+INSERT INTO "users" ("user_name")
+  (SELECT DISTINCT REGEXP_SPLIT_TO_TABLE("upvotes", ',') "user_name"
+   FROM "bad_posts"
+
+   UNION
+
+   SELECT DISTINCT REGEXP_SPLIT_TO_TABLE("downvotes", ',') "user_name"
+   FROM "bad_posts"
+
+   UNION
+
+   SELECT DISTINCT "username"
+   FROM "bad_posts"
+
+   UNION
+
+   SELECT DISTINCT "username"
+   FROM "bad_comments"
+  );
