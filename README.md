@@ -36,7 +36,7 @@ Here is the DDL used to create the orginal (bad) schema:
 
 You can find the complete codes and data in `bad-db.sql` file.
 
-## Steps to Take
+## Steps to Go
 
 This project was based on the following three main steps:
 
@@ -52,7 +52,7 @@ This project was based on the following three main steps:
     Once the new schema is created, it’s time to migrate the data from the provided schema. Some guidelines have also been listed in the following section.
 
 ## Requirements for New Database Schema Design
-### Guideline I
+### Guideline I - About creating tables
 
 Here is a list of features and specifications that Udiddit needs in order to support its website and administrative interface:
 
@@ -87,7 +87,7 @@ e. Make sure that a given user can only vote once on a given post:
 - If the user who cast a vote gets deleted, then all their votes will remain, but will become dissociated from the user.
 - If a post gets deleted, then all the votes for that post should be automatically deleted too.
 
-### Guideline II
+### Guideline II - About the queries
 Here is a list of queries that Udiddit needs in order to support its website and administrative interface. They are provided only to guide the design of new database schema.
 - List all users who haven’t logged in in the last year.
 - List all users who haven’t created any post.
@@ -127,9 +127,12 @@ After executing the DDL in the `udiddit_social_news_aggregator.sql`, we can get 
 6. Tip: We can start by running only `SELECT`s to fine-tune your queries, and use a `LIMIT` to avoid large data sets. Once we know we have the correct query, we can then run our full `INSERT...SELECT` query.
 
 
- 
+## How to Use the Codes
+There are two files included under the folder called `bad-db.sql` and `udiddit_social_news_aggregator.sql`.
 
+Firstly, running the `bad-db.sql` in the possgres terminal, we can create the original (bad) database schema as well as importing the data.
 
+Secondly, running the codes in the `udiddit_social_news_aggregator.sql` block by block, we can reconstruct the normalized (new) database schema and migrate the data respectively.
 
 
  
