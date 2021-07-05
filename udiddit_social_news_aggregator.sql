@@ -158,3 +158,13 @@ INSERT INTO "votes" ("user_id", "post_id", "vote")
                "id" AS "post_id"
         FROM "bad_posts") sub1
   JOIN "users" ON "sub1"."downvoters"="users"."user_name";
+
+
+-- V. Migrate data into "comments" from "bad_comments"
+INSERT INTO "comments" ("content", "post_id", "user_id")
+  SELECT "bad_comments"."text_content",
+         "posts"."id",
+         "users"."id"
+  FROM "bad_comments"
+  JOIN "posts" ON "posts"."id"="bad_comments"."post_id"
+  JOIN "users" ON "users"."user_name"="bad_comments"."username";
