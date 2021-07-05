@@ -13,3 +13,13 @@ CREATE TABLE "users" (
   CONSTRAINT "non_empty_user_name" CHECK(LENGTH(TRIM("user_name"))>0)
  );
 CREATE INDEX "user_name_index" ON "users" ("user_name");
+
+-- Guidline #1: b. Create "topics" table
+CREATE TABLE "topics" (
+  "id" SERIAL PRIMARY KEY,
+  "topic_name" VARCHAR(30) NOT NULL,
+  "description" VARCHAR(500),
+  CONSTRAINT "unique_topic_name" UNIQUE ("topic_name"),
+  CONSTRAINT "non_empty_topic_name" CHECK(LENGTH(TRIM("topic_name"))>0)
+ );
+CREATE INDEX "topic_name_index" ON "topics" ("topic_name");
