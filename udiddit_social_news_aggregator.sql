@@ -114,3 +114,7 @@ INSERT INTO "users" ("user_name")
    SELECT DISTINCT "username"
    FROM "bad_comments"
   );
+
+-- II. Migrate data into "topics" table from "bad_posts"
+INSERT INTO "topics" ("topic_name")
+  SELECT DISTINCT topic FROM bad_posts;
