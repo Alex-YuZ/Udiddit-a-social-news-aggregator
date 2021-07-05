@@ -134,3 +134,27 @@ INSERT INTO "posts" ("title",
   FROM "bad_posts" "bp"
   JOIN "topics" "tp" ON "tp"."topic_name"="bp"."topic"
   JOIN "users" "u" ON "u"."user_name"="bp"."username";
+
+
+-- IV. Migrate data into "votes" from "bad_posts" table
+-- Extract all users who voted 'like'
+INSERT INTO "votes" ("user_id", "post_id", "vote")
+  SELECT "users"."id",
+         "sub1"."post_id",
+         1
+  FROM (
+        SELECT REGEXP_SPLIT_TO_TABLE("upvotes", ',') upvoters,
+               "id" AS "post_id"
+        FROM "bad_posts") sub1
+  JOIN "users" ON "sub1"."upvoters"="users"."user_name";
+
+-- Extract all users who voted 'dislike'
+INSERT INTO "votes" ("user_id", "post_id", "vote")
+  SELECT "users"."id",
+         "sub1"."post_id",
+         -1
+  FROM (
+        SELECT REGEXP_SPLIT_TO_TABLE("downvotes", ',') downvoters,
+               "id" AS "post_id"
+        FROM "bad_posts") sub1
+  JOIN "users" ON "sub1"."downvoters"="users"."user_name";
